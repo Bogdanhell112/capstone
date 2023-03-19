@@ -67,7 +67,7 @@ const Navbar = () => {
             <DrawerOverlay />
             <DrawerContent>
                 <DrawerCloseButton />
-                <DrawerHeader>Menu</DrawerHeader>
+                <DrawerHeader fontFamily='Markazi Text' fontSize='30'>Little Lemon</DrawerHeader>
                 <DrawerBody>
                     {menuOptions.map((item) => (
                         <div className="menu-item">

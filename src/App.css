@@ -6,6 +6,11 @@
   font-weight: 800;
 }
 
+.menu-item {
+  display: flex;
+  gap: 1rem;
+}
+
 .specials-container {
   display: flex;
   width: 100%;
