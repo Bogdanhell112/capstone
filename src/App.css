@@ -6,10 +6,19 @@
   font-weight: 800;
 }
 
-img {
+.specials-container {
+  display: flex;
+  width: 100%;
+  text-align: left;
+  justify-content: center;
+}
+
+.home-image-section > img {
   border-radius: 18px;
   align-content: center;
   object-fit: cover;
+  margin-left: auto;
+  margin-right: auto;
 }
 .App {
   min-height: 100vh;
@@ -27,9 +36,13 @@ body {
 }
 
 nav {
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr);
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  gap: 7rem;
   min-height: 90px;
 }
 .nav-menu-container {
@@ -63,12 +76,13 @@ nav {
 .specials-heading {
   display: grid;
   grid-template-columns: minmax(300px, 1fr);
-  flex: 1;
   display: flex;
   width: 100%;
-  text-align: left;
-  justify-content: space-between;
-  padding: 5rem 5rem;
+  text-align: center;
+  justify-content: center;
+  gap: 3rem;
+  min-height: 90px;
+  padding: 5rem 0rem;
 }
 
 .markTitle {
@@ -114,7 +128,6 @@ nav {
 }
 
 .home-text-section {
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -131,6 +144,16 @@ nav {
   font-weight: 500;
   size: 18pt;
   color: white;
+  padding: 2rem 0rem;
+}
+
+.third-heading {
+  font-size: 40pt;
+  font-family: 'Markazi Text', serif;
+  color: white;
+  line-height: 3rem;
+  max-width: 600px;
+
 }
 
 .primary-heading {
@@ -410,11 +433,22 @@ nav {
     margin-right: 1rem;
     font-size: 1rem;
   }
+
+  .home-image-section {
+    align-self: center;
+    padding: 2rem 5rem;
+  }
+
   .primary-button {
     font-size: 1rem;
   }
   .home-bannerImage-container {
     max-width: 600px;
+  }
+  .home-image-section > img {
+    border-radius: 18px;
+    align-content: center;
+    object-fit: cover;
   }
 }
 @media (max-width: 800px) {
@@ -428,6 +462,11 @@ nav {
     background-color: #495e57;
     text-align: center;
     justify-content: center;
+  }
+
+  .home-image-section {
+    align-self: center;
+    padding: 2rem 5rem;
   }
 
   .specials-heading {
@@ -540,6 +579,11 @@ nav {
   .footer-section-columns {
     margin: 1rem 0rem;
   }
+  .home-image-section > img {
+    border-radius: 18px;
+    align-content: center;
+    object-fit: cover;
+  }
 
 }
 @media (max-width: 600px) {
@@ -549,6 +593,12 @@ nav {
     background-color: #495e57;
     text-align: center;
     justify-content: center;
+  }
+
+  .home-image-section > img {
+    border-radius: 18px;
+    align-content: center;
+    object-fit: cover;
   }
 
   .home-image-section {

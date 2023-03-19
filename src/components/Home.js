@@ -1,27 +1,32 @@
 import React from 'react'
 import Navbar from '../utilities/Navbar'
 import BannerImage from '../icons_assets/restauranfood.jpg'
-import Card from '../utilities/Card'
+import CardSpecial from '../utilities/CardSpecial'
+import { Flex } from '@chakra-ui/react'
+import Pic1 from '../icons_assets/greek-salad.jpg'
+import Pic2 from '../icons_assets/bruchetta.svg'
+import Pic3 from '../icons_assets/lemon-dessert.jpg'
+
 
 const Home = () => {
   const weekSpecials = [
     {
       title: 'Greek Salad',
-      description: 'Fresh greens, tomatoes, cucumbers, onions, feta cheese, and olives',
-      price: '$25.00',
-      image: '../icons_assets/greek-salad.jpg'
+      description: 'The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.',
+      price: '$12.99',
+      image: Pic1
     },
     {
-      title: 'Chicken Souvlaki',
-      description: 'Grilled chicken, tomatoes, onions, and tzatziki sauce',
-      price: '$25.00',
-      image: '../icons_assets/chicken-souvlaki.jpg'
+      title: 'Brushcetta',
+      description: 'Our Bruschetta is made from grilled bread that has been smeard with garlic and seasoned with salt and olive oil.',
+      price: '$5.99',
+      image: Pic2
     },
     {
-      title: 'Lamb Souvlaki',
-      description: 'Grilled lamb, tomatoes, onions, and tzatziki sauce',
-      price: '$25.00',
-      image: '../icons_assets/lamb-souvlaki.jpg'
+      title: 'Lemon Dessert',
+      description: 'This comes straight from grandma\'s recipe book, every last ingredient has been sourced and is as authentic as can be imagined.',
+      price: '$5.00',
+      image: Pic3
     },
   ]
 
@@ -31,7 +36,7 @@ const Home = () => {
         <div className='home-background'>
         <div className='home-text-section'>
             <h1 className='primary-heading'>Little Lemon</h1>
-            <h2 className='mark'>Chicago</h2>
+            <h1 className='third-heading' >Chicago</h1>
             <p className='karla'>We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.</p>
             <button className='secondary-button'>Reserve a Table</button>
         </div>
@@ -48,12 +53,9 @@ const Home = () => {
         </div>
     </div>
     <div className='specials-container'>
+    <Flex direction={['column', 'row']} wrap='wrap'align='stretch' justify='center' gap={10}>
        {weekSpecials.map((item) => (
-          // Pass item properties as props to Card component
-          // Replace with your own Card component implementation
-          // You may need to update your Card component to accept these props
-          // and display them appropriately
-          <Card 
+          <CardSpecial
               key={item.title}
               title={item.title}
               description={item.description}
@@ -61,6 +63,7 @@ const Home = () => {
               image={item.image}
           />
         ))}
+        </Flex>
     </div>
     </div>
   )

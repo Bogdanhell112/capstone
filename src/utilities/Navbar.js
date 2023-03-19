@@ -3,14 +3,14 @@ import { useState } from 'react';
 import Logo from '../icons_assets/Logo.svg';
 import { HiOutlineBars3 } from 'react-icons/hi2';
 import {
-    Box,
     Drawer,
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText,
-} from '@mui/material';
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+} from '@chakra-ui/react'
 import HomeIcon from '@mui/icons-material/Home';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import BookOnlineIcon from '@mui/icons-material/BookOnline';
@@ -61,27 +61,22 @@ const Navbar = () => {
             <a href="">Login</a>
         </div>
         <div className="nav-menu-container">
-            <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
+            <HiOutlineBars3 onClick={() => setOpenMenu(!openMenu)} />
         </div>
-        <Drawer open={openMenu} onClose={() => setOpenMenu(false)} anchor="right">
-            <Box sx={{ width: 250 }}
-                role="presentation"
-                onClick={() => setOpenMenu(false)}
-                onKeyDown={() => setOpenMenu(false)}
-                >
-                <List>
-                {menuOptions.map((item) => (
-                    <ListItem key={item.text} disablePadding >
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {item.icon}
-                                <ListItemText primary={item.text} />
-                            </ListItemIcon>
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-                </List>
-            </Box>
+        <Drawer isOpen={openMenu} placement="right" onClose={() => setOpenMenu(!openMenu)}>
+            <DrawerOverlay />
+            <DrawerContent>
+                <DrawerCloseButton />
+                <DrawerHeader>Menu</DrawerHeader>
+                <DrawerBody>
+                    {menuOptions.map((item) => (
+                        <div className="menu-item">
+                            <div className="menu-item-icon">{item.icon}</div>
+                            <div className="menu-item-text">{item.text}</div>
+                        </div>
+                    ))}
+                </DrawerBody>
+            </DrawerContent>
         </Drawer>
     </nav>
     );
