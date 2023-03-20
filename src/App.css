@@ -2,8 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Karla', sans-serif;
-  font-weight: 800;
 }
 
 .menu-item {
@@ -16,6 +14,7 @@
   width: 100%;
   text-align: left;
   justify-content: center;
+  padding-bottom: 5rem;
 }
 
 .home-image-section > img {
@@ -62,6 +61,21 @@ nav {
   transition: 0.2s;
 }
 
+.testimonials-heading {
+  background-color: #495e57;
+}
+
+.testimonials-heading-text {
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr);
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  gap: 3rem;
+  min-height: 90px;
+  padding: 5rem 0rem;
+}
+
  a:hover {
   color: #f4ce14;
 }
@@ -97,6 +111,15 @@ nav {
   color: black;
   line-height: 3rem;
 }
+
+.markTitleWhite {
+  font-family: 'Markazi Text', serif;
+  font-size: 64pt;
+  font-weight: 800;
+  color: white;
+  line-height: 3rem;
+}
+
 
 .navbar-cart-icon {
   font-size: 1.15rem;
@@ -231,11 +254,13 @@ h2 {
   font-size: 1.5rem;
 }
 .secondary-button:hover {
-  background-color: #ee9972;
+  background-color: #edefee;
+  color: #495e57
 }
 
 .specials-secondary-button:hover {
-  background-color: #ee9972;
+  background-color: #495e57;
+  color: #edefee
 }
 
 .about-section-container {

@@ -5,7 +5,6 @@ import { HiOutlineBars3 } from 'react-icons/hi2';
 import {
     Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,

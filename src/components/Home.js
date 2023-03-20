@@ -2,13 +2,57 @@ import React from 'react'
 import Navbar from '../utilities/Navbar'
 import BannerImage from '../icons_assets/restauranfood.jpg'
 import CardSpecial from '../utilities/CardSpecial'
-import { Flex } from '@chakra-ui/react'
+import Testimonials from '../utilities/Testimonials'
+import { Flex, Box } from '@chakra-ui/react'
 import Pic1 from '../icons_assets/greek-salad.jpg'
 import Pic2 from '../icons_assets/bruchetta.svg'
 import Pic3 from '../icons_assets/lemon-dessert.jpg'
+import Profile1 from '../users_picture/profile1.jpeg'
+import Profile2 from '../users_picture/profile2.jpeg'
+import Profile3 from '../users_picture/profile3.jpeg'
+import Profile4 from '../users_picture/profile4.jpeg'
+import Profile5 from '../users_picture/profile5.jpeg'
 
 
 const Home = () => {
+  const testimonials = [
+    {
+      starRating: 5,
+      customerName: 'Rafael',
+      pictureUrl: Profile1,
+      review: 'Excellent food, excellent service, excellent atmosphere. I would recommend this place to anyone.'
+    },
+    {
+      starRating: 5,
+      customerName: 'Tina',
+      pictureUrl: Profile2,
+      review: 'Excellent food, excellent service, excellent atmosphere. I would recommend this place to anyone.'
+    },
+    {
+      starRating: 5,
+      customerName: 'Daniela',
+      pictureUrl: Profile3,
+      review: 'Awesome food, awesome service, awesome atmosphere. I would recommend this place to anyone.'
+    },
+    {
+      starRating: 4,
+      customerName: 'Andreea',
+      pictureUrl: Profile4,
+      review: 'Awesome food, awesome service, awesome atmosphere. I would recommend this place to anyone.'
+    },
+    {
+      starRating: 3,
+      customerName: 'Gassan',
+      pictureUrl: Profile5,
+      review: 'Awesome food, awesome service, awesome atmosphere. I would recommend this place to anyone.'
+    },
+    {
+      starRating: 5,
+      customerName: 'Elena',
+      pictureUrl: Profile3,
+      review: 'Awesome food, awesome service, awesome atmosphere. I would recommend this place to anyone.'
+    },
+  ]
   const weekSpecials = [
     {
       title: 'Greek Salad',
@@ -65,6 +109,24 @@ const Home = () => {
         ))}
         </Flex>
     </div>
+    <div className='testimonials-heading'>
+        <div className='testimonials-container'>
+          <div className='testimonials-heading-text'>
+          <h1 className='markTitleWhite' >Testimonials</h1>
+        <Box w={['100%', '100%', '100%', '960px']} mx='auto' overflowX='auto' alignSelf='center' display='-webkit-box' padding='5' gap='5' scrollBehavior='smooth' scro >
+    {testimonials.map((item) => (
+      <Testimonials
+        key={item.customerName}
+        customerName={item.customerName}
+        review={item.review}
+        rating={item.starRating}
+        image={item.pictureUrl}
+      />
+    ))}
+</Box>
+</div>
+        </div>
+        </div>
     </div>
   )
 }
