@@ -39,25 +39,12 @@ body {
   background-color: #f6f6f6;
 }
 
-nav {
-  display: grid;
-  grid-template-columns: minmax(300px, 1fr);
-  display: flex;
-  width: 100%;
-  text-align: center;
-  justify-content: center;
-  gap: 7rem;
-  min-height: 90px;
-}
 .nav-menu-container {
   display: none;
 }
 .nav-links-container a {
-  margin-right: 3rem;
   text-decoration: none;
   color: black;
-  font-size: 1.1rem;
-  font-weight: 600;
   transition: 0.2s;
 }
 
@@ -454,15 +441,10 @@ h2 {
 }
 
 nav {
-  padding: 0 5rem 0 5rem;
   align-items: center;
 }
 
 @media (max-width: 1000px) {
-  .nav-links-container a {
-    margin-right: 1rem;
-    font-size: 1rem;
-  }
 
   .home-image-section {
     align-self: center;

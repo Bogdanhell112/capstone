@@ -16,6 +16,7 @@ import BookOnlineIcon from '@mui/icons-material/BookOnline';
 import InfoIcon from '@mui/icons-material/Info';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LoginIcon from '@mui/icons-material/Login';
+import { VStack, HStack, useMediaQuery } from '@chakra-ui/react';
 
 const Navbar = () => {
     const [openMenu, setOpenMenu] = useState(false);
@@ -46,22 +47,30 @@ const Navbar = () => {
         },
     ];
 
+    const [isSmallerThan900] = useMediaQuery("(max-width: 900px)");
+    const [isSmallerThan800] = useMediaQuery("(max-width: 800px)");
+
     return (
     <nav>
-        <div className="nav-logo-container">
+       <HStack  alignItems='center' spacing='40' justify='center' justifyContent='center' padding='2rem 0 2rem 0'>
             <img src={Logo} alt="logo" />
-        </div>
-        <div className="nav-links-container">
+            <HStack justify='center' 
+            fontFamily='karla' spacing={5}  
+            fontWeight='extrabold' 
+            fontSize={isSmallerThan900 ? '16px' : '18px'} display={isSmallerThan800 ? 'none' : 'flex'} 
+            justifyContent='space-around' >
             <a href="">Home</a>
             <a href="">Menu</a>
             <a href="">Reservations</a>
             <a href="">About</a>
             <a href="">Order Online</a>
             <a href="">Login</a>
-        </div>
-        <div className="nav-menu-container">
+            </HStack>
+            <div className="nav-menu-container">
             <HiOutlineBars3 onClick={() => setOpenMenu(!openMenu)} />
         </div>
+        </HStack>
+       
         <Drawer isOpen={openMenu} placement="right" onClose={() => setOpenMenu(!openMenu)}>
             <DrawerOverlay />
             <DrawerContent>
