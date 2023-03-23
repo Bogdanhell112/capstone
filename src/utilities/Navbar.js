@@ -24,27 +24,33 @@ const Navbar = () => {
     const menuOptions = [
         {
             text: 'Home',
-            icon: <HomeIcon />
+            icon: <HomeIcon />,
+            url: <Link to='/' className='nav-item'>Home</Link>
         },
         {
             text: 'Menu',
-            icon: <MenuBookIcon />
+            icon: <MenuBookIcon />,
+            url:  <Link to='/' className='nav-item'>Menu</Link>
         },
         {
             text: 'Reservations',
-            icon: <BookOnlineIcon />
+            icon: <BookOnlineIcon />,
+            url: <Link to='/reservations' className='nav-item'>Reservations</Link>
         },
         {
             text: 'About',
-            icon: <InfoIcon />
+            icon: <InfoIcon />,
+            url: <Link to='/about' className='nav-item'>About</Link>
         },
         {
             text: 'Order Online',
-            icon: <ShoppingCartIcon />
+            icon: <ShoppingCartIcon />,
+            url: <Link to='/' className='nav-item'>Order Online</Link>
         },
         {
             text: 'Login',
-            icon: <LoginIcon />
+            icon: <LoginIcon />,
+            url: <Link to='/' className='nav-item'>Login</Link>
         },
     ];
 
@@ -61,11 +67,11 @@ const Navbar = () => {
             fontSize={isSmallerThan900 ? '16px' : '18px'} display={isSmallerThan800 ? 'none' : 'flex'} 
             justifyContent='space-around' >
             <Link to='/' className='nav-item'>Home</Link>
-            <a href="">Menu</a>
+            <Link to='/' className='nav-item'>Menu</Link>
             <Link to='/reservations' className='nav-item'>Reservations</Link>
-            <a href="">About</a>
-            <a href="">Order Online</a>
-            <a href="">Login</a>
+            <Link to='/about' className='nav-item'>About</Link>
+            <Link to='/' className='nav-item'>Order Online</Link>
+            <Link to='/' className='nav-item'>Login</Link>
             </HStack>
             <div className="nav-menu-container">
             <HiOutlineBars3 onClick={() => setOpenMenu(!openMenu)} />
@@ -80,7 +86,7 @@ const Navbar = () => {
                     {menuOptions.map((item) => (
                         <div className="menu-item">
                             <div className="menu-item-icon">{item.icon}</div>
-                            <div className="menu-item-text">{item.text}</div>
+                            <div className="menu-item-url">{item.url}</div>
                         </div>
                     ))}
                 </DrawerBody>
