@@ -6,8 +6,8 @@ import { motion } from 'framer-motion'
 const CardSpecial = ({ title, description, price, image }) => {
   return (
     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 1 }}>
-    <VStack background='#edefee' boxShadow='lg' borderTopRadius='18' w={['100%', '300px']} align='start'  justify='stretch' cursor='pointer'>
-      <Image src={image} alt={title}  height='200px' minW='300px' objectFit='cover' borderTopRadius='18' />
+    <VStack background='#edefee' boxShadow='lg' borderTopRadius='18' w={'300px'} align='start'  justify='stretch' cursor='pointer' >
+      <Image src={image} alt={title}  height='200px' minW='300px' objectFit='cover' borderTopRadius='18'  />
       <VStack align='start' spacing={10} p={4} justifyContent='space-between'>
         <HStack justify='space-between' w='100%' align='center'>
           <Heading fontFamily='Markazi Text' fontSize='30' fontWeight='bold'>{title}</Heading>

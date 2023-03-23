@@ -17,6 +17,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LoginIcon from '@mui/icons-material/Login';
 import { VStack, HStack, useMediaQuery } from '@chakra-ui/react';
+import {Routes, Route, Link} from 'react-router-dom'
 
 const Navbar = () => {
     const [openMenu, setOpenMenu] = useState(false);
@@ -54,14 +55,14 @@ const Navbar = () => {
     <nav>
        <HStack  alignItems='center' spacing='40' justify='center' justifyContent='center' padding='2rem 0 2rem 0'>
             <img src={Logo} alt="logo" />
-            <HStack justify='center' 
-            fontFamily='karla' spacing={5}  
-            fontWeight='extrabold' 
+            <HStack justify='center'
+            fontFamily='karla' spacing={5}
+            fontWeight='extrabold'
             fontSize={isSmallerThan900 ? '16px' : '18px'} display={isSmallerThan800 ? 'none' : 'flex'} 
             justifyContent='space-around' >
-            <a href="">Home</a>
+            <Link to='/' className='nav-item'>Home</Link>
             <a href="">Menu</a>
-            <a href="">Reservations</a>
+            <Link to='/reservations' className='nav-item'>Reservations</Link>
             <a href="">About</a>
             <a href="">Order Online</a>
             <a href="">Login</a>
@@ -70,7 +71,6 @@ const Navbar = () => {
             <HiOutlineBars3 onClick={() => setOpenMenu(!openMenu)} />
         </div>
         </HStack>
-       
         <Drawer isOpen={openMenu} placement="right" onClose={() => setOpenMenu(!openMenu)}>
             <DrawerOverlay />
             <DrawerContent>

@@ -1,9 +1,10 @@
 import React from 'react'
 import Navbar from '../utilities/Navbar'
+import Footer from '../utilities/Footer'
 import BannerImage from '../icons_assets/restauranfood.jpg'
 import CardSpecial from '../utilities/CardSpecial'
 import Testimonials from '../utilities/Testimonials'
-import { Flex, Box, HStack, VStack, Heading, Text, Image} from '@chakra-ui/react'
+import { Flex, Box, HStack, VStack, Heading, Text, Image, Button} from '@chakra-ui/react'
 import Pic1 from '../icons_assets/greek-salad.jpg'
 import Pic2 from '../icons_assets/bruchetta.svg'
 import Pic3 from '../icons_assets/lemon-dessert.jpg'
@@ -14,6 +15,8 @@ import Profile4 from '../users_picture/profile4.jpeg'
 import Profile5 from '../users_picture/profile5.jpeg'
 import Pic5 from '../icons_assets/restaurantchefB.jpg'
 import Pic6 from '../icons_assets/restaurant.jpg'
+
+
 
 
 const Home = () => {
@@ -79,25 +82,49 @@ const Home = () => {
   return (
     <div className='home-container'>
         <Navbar />
-        <div className='home-background'>
-        <div className='home-text-section'>
-            <h1 className='primary-heading'>Little Lemon</h1>
-            <h1 className='third-heading' >Chicago</h1>
-            <p className='karla'>We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.</p>
-            <button className='secondary-button'>Reserve a Table</button>
-        </div>
-            <div className='home-image-section'>
-            <img src={BannerImage} alt='restaurant food' width='300px' height='300px' />
-            </div>
-    </div>
-    <div className='specials-heading'>
-        <div className='specials-heading-text'>
-            <h1 className='markTitle'>This Week Specials!</h1>
-        </div>
-        <div className='specials-item-button'>
-        <button className='specials-secondary-button'>Online Menu</button>
-        </div>
-    </div>
+        <HStack wrap='wrap'align='stretch' justify='center' padding='3rem 0rem' alignItems='center' spacing={2} backgroundColor='#495e57' gap='200px'  sx={{
+    '@media (max-width: 500px)': {
+      textAlign: 'center',
+      alignItems: 'center',
+      gap: '20px',
+    },
+  }} >
+          <VStack align='left'  sx={{
+    '@media (max-width: 500px)': {
+      textAlign: 'center',
+      alignItems: 'center',
+      gap: '20px',
+    },
+  }} >
+            <Heading fontFamily='Markazi Text' fontSize='64' fontWeight='medium' textColor='#f4ce14' lineHeight={3} >
+            Little Lemon
+            </Heading>
+            <Heading fontFamily='Markazi Text' fontWeight='regular' fontSize='40'textColor='white'>
+            Chicago
+            </Heading>
+            <Text  paddingTop={2} fontFamily='Karla' w='80' fontSize='20' fontWeight='medium' textColor='white'>
+            We are family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.
+            </Text>
+                <Button fontFamily='Karla' fontSize='18' fontWeight='extrabold' textColor='black' backgroundColor='#f4ce14' padding='1.5rem 3rem' borderRadius='16' w='3xs' boxShadow='lg' _hover={{ boxShadow: 'none', backgroundColor: '#ee9972' }} _active={{ boxShadow: 'none' }} _focus={{ boxShadow: 'none' }}>
+                Reserve a Table
+                </Button>
+          </VStack>
+          <Image src={BannerImage} w='300px' h='400px' objectFit='cover' borderRadius={18} className='about-us-images' />
+        </HStack>
+        <HStack wrap='wrap' align='center' justifyContent='center' justify='center' padding='3rem 0rem' alignItems='center' spacing={2}  gap={20}  sx={{
+    '@media (max-width: 500px)': {
+      textAlign: 'center',
+      alignItems: 'center',
+      gap: '20px',
+    },
+  }} >
+            <Heading display='flex' fontFamily='Markazi Text' fontSize='64' fontWeight='medium' textColor='black' justifyContent='center'  alignItems='center' lineHeight={10} >
+            This weeks specials!
+            </Heading>
+                <Button fontFamily='Karla' fontSize='18' fontWeight='extrabold' textColor='black' backgroundColor='#f4ce14' padding='1.5rem 3rem' borderRadius='16' w='3xs' boxShadow='lg' _hover={{ boxShadow: 'none', backgroundColor: '#495e57', textColor: 'white' }} _active={{ boxShadow: 'none' }} _focus={{ boxShadow: 'none' }}>
+                Online Menu
+                </Button>
+        </HStack>
     <div className='specials-container'>
     <Flex direction={['column', 'row']} wrap='wrap'align='stretch' justify='center' gap={10}>
        {weekSpecials.map((item) => (
@@ -111,10 +138,10 @@ const Home = () => {
         ))}
         </Flex>
     </div>
-    <div className='testimonials-heading'>
-        <div className='testimonials-container'>
-          <div className='testimonials-heading-text'>
-          <h1 className='markTitleWhite' >Testimonials</h1>
+        <VStack wrap='wrap'align='stretch' justify='center' padding='3rem 0rem' alignItems='center' spacing={2} backgroundColor='#495e57'>
+        <Heading display='flex' fontFamily='Markazi Text' fontSize='64' fontWeight='medium' textColor='white' justifyContent='center'  alignItems='center' lineHeight={10} >
+            Testimonials
+            </Heading>
         <Box w={['100%', '100%', '100%', '960px']} mx='auto' overflowX='auto' alignSelf='center' display='-webkit-box' padding='5' gap='5' scrollBehavior='smooth' scro >
     {testimonials.map((item) => (
       <Testimonials
@@ -126,14 +153,12 @@ const Home = () => {
       />
     ))}
 </Box>
-</div>
-        </div>
-        </div>
-        <Heading fontFamily='Markazi Text' fontSize='64' padding='5rem 0rem' textAlign='center'>
+</VStack>
+        <Heading fontFamily='Markazi Text' fontSize='64' padding='3rem 0 0 0' textAlign='center'>
           About Us
         </Heading>
-        <HStack wrap='wrap'align='stretch' justify='center' paddingBottom='5rem' alignItems='center' spacing={2}>
-          <VStack align='left'>
+        <HStack wrap='wrap'align='stretch' justify='center' paddingBottom='5rem' alignItems='center'>
+          <VStack align='left' m='10'>
             <Heading fontFamily='Markazi Text' fontSize='64' textColor='#f4ce14' lineHeight={3} >
             Little Lemon
             </Heading>
@@ -153,61 +178,14 @@ const Home = () => {
             At Little Lemon, we believe that food is not just about nourishment, but also about bringing people together. Whether you're a lifelong fan of Mediterranean food or trying it for the first time, we invite you to join us and discover the flavors of the Mediterranean.
             </Text>
           </VStack>
-          <Image src={Pic5} w='300px' h='600px' objectFit='cover' borderRadius={18} className='about-us-images' />
-          <Image src={Pic6} w='300px' h='600px' objectFit='cover' borderRadius={18} className='about-us-images' />
+          <Image src={Pic5} w='300px' h='600px' objectFit='cover' borderRadius={18} padding='1' />
+          <Image src={Pic6} w='300px' h='600px' objectFit='cover' borderRadius={18} padding='1' sx={{
+    '@media (max-width: 500px)': {
+      display: 'none',
+    },
+  }}/>
         </HStack>
-        <HStack wrap='wrap' alignItems='top' justify='center' padding='5rem 0 5rem 0' backgroundColor='#495e57' gap={20}>
-        <Image src={Pic5} w='300px' h='400px' objectFit='cover' borderRadius={18} className='about-us-images' />
-          <VStack align='left'>
-            <Heading fontFamily='Markazi Text' fontSize='64' textColor='#f4ce14' lineHeight={3} >
-            Doormat
-            </Heading>
-            <Heading fontFamily='Markazi Text' fontSize='40' textColor='white' >
-            Navigation
-            </Heading>
-            <VStack align='left' textColor='white'
-            fontFamily='Karla'
-            spacing={2}
-            fontWeight='medium'
-            fontSize='18'
-            justifyContent='space-around' >
-            <a href="">Home</a>
-            <a href="">Menu</a>
-            <a href="">Reservations</a>
-            <a href="">About</a>
-            <a href="">Order Online</a>
-            <a href="">Login</a>
-            </VStack>
-          </VStack>
-          <VStack align='left'>
-          <Heading fontFamily='Markazi Text' fontSize='40' textColor='white' >
-            Contact
-            </Heading>
-            <VStack align='left' textColor='white'
-            fontFamily='Karla'
-            spacing={2}
-            fontWeight='medium'
-            fontSize='18'
-            justifyContent='space-around' >
-            <a href="">Home</a>
-            <a href="">Menu</a>
-            </VStack>
-            </VStack>
-            <VStack align='left'>
-          <Heading fontFamily='Markazi Text' fontSize='40' textColor='white' >
-            Social
-            </Heading>
-            <VStack align='left' textColor='white'
-            fontFamily='Karla'
-            spacing={2}
-            fontWeight='medium'
-            fontSize='18'
-            justifyContent='space-around' >
-            <a href="">Home</a>
-            <a href="">Menu</a>
-            </VStack>
-            </VStack>
-        </HStack>
+        <Footer/>
     </div>
   )
 }
