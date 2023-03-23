@@ -15,6 +15,7 @@ import Profile4 from '../users_picture/profile4.jpeg'
 import Profile5 from '../users_picture/profile5.jpeg'
 import Pic5 from '../icons_assets/restaurantchefB.jpg'
 import Pic6 from '../icons_assets/restaurant.jpg'
+import { Link } from 'react-router-dom'
 
 
 
@@ -105,9 +106,11 @@ const Home = () => {
             <Text  paddingTop={2} fontFamily='Karla' w='80' fontSize='20' fontWeight='medium' textColor='white'>
             We are family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.
             </Text>
+                <Link to='/reservations' className='nav-item'>
                 <Button fontFamily='Karla' fontSize='18' fontWeight='extrabold' textColor='black' backgroundColor='#f4ce14' padding='1.5rem 3rem' borderRadius='16' w='3xs' boxShadow='lg' _hover={{ boxShadow: 'none', backgroundColor: '#ee9972' }} _active={{ boxShadow: 'none' }} _focus={{ boxShadow: 'none' }}>
                 Reserve a Table
                 </Button>
+                </Link>
           </VStack>
           <Image src={BannerImage} w='300px' h='400px' objectFit='cover' borderRadius={18} className='about-us-images' />
         </HStack>
