@@ -33,13 +33,17 @@ function BookingForm({ bookedSlots, availableSlots, onSubmit }) {
             <Field type="date" name="date" />
             <ErrorMessage name="date" component="div" />
 
-          <label htmlFor="time">Choose time</label>
+          <FormLabel htmlFor="time">Choose time</FormLabel>
           <Field as="select" id="time" name="time">
+            {({field}) =>(
+            <Select {...field} id="time" placeholder='Select time'>
             {availableSlots.map(slot => (
               <option key={slot} value={slot} disabled={bookedSlots.includes(slot)}>
                 {slot}
               </option>
             ))}
+            </Select>
+             )}
           </Field>
           <ErrorMessage name="time" component="div" />
 
@@ -55,10 +59,14 @@ function BookingForm({ bookedSlots, availableSlots, onSubmit }) {
           <ErrorMessage name="guests" component="div" />
 
           <FormLabel>Occasion</FormLabel>
-          <Select id="occasion" placeholder='Select occasion'>
-            <option value="Birthday">Birthday</option>
-            <option value="Anniversary">Anniversary</option>
+          <Field name="occasion">
+          {({ field, form }) => (
+          <Select {...field} id="occasion" placeholder='Select occasion'>
+          <option value="Birthday">Birthday</option>
+          <option value="Anniversary">Anniversary</option>
           </Select>
+          )}
+          </Field>
           <ErrorMessage name="occasion" component="div" />
 
           <Button
