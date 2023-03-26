@@ -145,7 +145,7 @@ const Home = () => {
         <Heading display='flex' fontFamily='Markazi Text' fontSize='64' fontWeight='medium' textColor='white' justifyContent='center'  alignItems='center' lineHeight={10} >
             Testimonials
             </Heading>
-        <Box w={['100%', '100%', '100%', '960px']} mx='auto' overflowX='auto' alignSelf='center' display='-webkit-box' padding='5' gap='5' scrollBehavior='smooth' scro >
+        <Box w={['100%', '100%', '100%', '960px']} mx='auto' overflowX='auto' alignSelf='center' display='-webkit-box' padding='5' gap='5' scrollBehavior='smooth' >
     {testimonials.map((item) => (
       <Testimonials
         key={item.customerName}

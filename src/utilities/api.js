@@ -7,7 +7,7 @@ const seededRandom = function (seed) {
     };
 }
 
-export const submitAPI = function(formData) {
+export const submitAPI = function(values) {
     return true;
 };
 

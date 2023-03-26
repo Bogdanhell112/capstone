@@ -37,6 +37,7 @@ const Reservations = () => {
   const handleFormSubmit = (values) => {
     const newSlot = values.time;
     setBookedSlots([...bookedSlots, newSlot]);
+    submitAPI(values);
     console.log(values);
   };
 

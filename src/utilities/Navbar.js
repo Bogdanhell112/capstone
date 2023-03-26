@@ -82,7 +82,7 @@ const Navbar = () => {
             <DrawerContent>
                 <DrawerCloseButton />
                 <DrawerHeader fontFamily='Markazi Text' fontSize='30'>Little Lemon</DrawerHeader>
-                <DrawerBody>
+                <DrawerBody fontFamily='karla' fontSize={18} fontWeight='bold'>
                     {menuOptions.map((item) => (
                         <div key = {item.text} className="menu-item">
                             <div className="menu-item-icon">{item.icon}</div>
