@@ -1,0 +1,26 @@
+input[type=date], input[type=time], input[type=number], select {
+    border: 2px solid #495e57;
+    border-radius: 4px;
+    width: 250px;
+    height: 40px;
+  }
+
+input[type=number] {
+    text-align: center;
+}
+
+input.input-error,
+select.input-error {
+  border: 2px solid #fc8181;
+  border-radius: 4px;
+  width: 250px;
+  height: 40px;
+}
+
+.error {
+  color: #fc8181;
+  font-family: 'karla';
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 5px;
+}

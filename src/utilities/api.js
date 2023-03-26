@@ -12,16 +12,22 @@ export const submitAPI = function(formData) {
 };
 
 export const fetchAPI = function(date) {
-    let result = [];
-    let random = seededRandom(date.getDate());
-
-    for(let i = 17; i <= 23; i++) {
-        if(random() < 0.5) {
-            result.push(i + ':00');
+    return new Promise((resolve, reject) => {
+      date = new Date(date);
+      let result = [];
+      let random = seededRandom(date.getDate());
+  
+      for (let i = 17; i <= 23; i++) {
+        if (random() < 0.5) {
+          result.push(i + ':00');
         }
-        if(random() < 0.5) {
-            result.push(i + ':30');
+        if (random() < 0.5) {
+          result.push(i + ':30');
         }
-    }
-    return result;
-};
+      }
+  
+      setTimeout(() => {
+        resolve(result);
+      }, 1000);
+    });
+  };

@@ -84,7 +84,7 @@ const Navbar = () => {
                 <DrawerHeader fontFamily='Markazi Text' fontSize='30'>Little Lemon</DrawerHeader>
                 <DrawerBody>
                     {menuOptions.map((item) => (
-                        <div className="menu-item">
+                        <div key = {item.text} className="menu-item">
                             <div className="menu-item-icon">{item.icon}</div>
                             <div className="menu-item-url">{item.url}</div>
                         </div>

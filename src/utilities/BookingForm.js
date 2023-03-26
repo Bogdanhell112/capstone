@@ -1,24 +1,13 @@
-import { FormLabel, NumberInput,
-NumberInputField,
-NumberInputStepper,
-NumberIncrementStepper,
-NumberDecrementStepper,
-Select,
-Button,
-VStack } from '@chakra-ui/react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Button, VStack, Box } from '@chakra-ui/react';
+import './BookingForm.css';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useEffect, useState } from 'react';
 import { fetchAPI, submitAPI } from '../utilities/api';
 
-function BookingForm({ bookedSlots, onSubmit, onDateChange, selectedDate }) {
+function BookingForm({ bookedSlots, onSubmit, onDateChange }) {
   const [availableSlots, setAvailableSlots] = useState([]);
-
-  useEffect(() => {
-    const date = new Date();
-    const slots = fetchAPI(date);
-    setAvailableSlots(slots);
-  }, []);
+  const [selectedDate, setSelectedDate] = useState('');
 
   const validationSchema = Yup.object().shape({
     date: Yup.date().required('Date is required'),
@@ -27,57 +16,101 @@ function BookingForm({ bookedSlots, onSubmit, onDateChange, selectedDate }) {
     occasion: Yup.string().required('Occasion is required'),
   });
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    onSubmit(values);
-    setSubmitting(false);
+  const currentDate = new Date();
+  const formattedDate = currentDate.toISOString().slice(0, 10);
+  const {values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, setFieldValue} = useFormik({
+    initialValues: {  
+      date: '',
+      time: '',
+      guests: '',
+      occasion: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit,
+  });
+
+    console.log(values);
+    console.log(errors);
+
+
+  useEffect(() => {
+    fetchAPI(selectedDate).then(slots => setAvailableSlots(slots));
+  }, [selectedDate]);
+
+  
+
+// get the submited values and update the available slots
+
+  const handleDateChange = (e) => {
+    const date = e.target.value;
+    setSelectedDate(date);
+    onDateChange(date);
+    setFieldValue('date', date); 
+    fetchAPI(date).then(slots => setAvailableSlots(slots));
   };
 
   return (
     <VStack backgroundColor='white'>
-    <Formik initialValues={{ date: selectedDate, time: '', guests: 1, occasion: '' }}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}>
-      {({ isSubmitting }) => (
-        <Form>
-            <FormLabel>Date</FormLabel>
-            <Field type="date" name="date" onChange={(e) => onDateChange(e.target.value)} value={selectedDate}/>
-            <ErrorMessage name="date" component="div" />
-
-          <FormLabel htmlFor="time">Choose time</FormLabel>
-          <Field as="select" id="time" name="time">
-            {({field}) =>(
-            <Select {...field} id="time" placeholder='Select time'>
+        <form onSubmit={handleSubmit}>
+            <VStack justify='center' justifyContent='space-between' alignContent='center' textAlign='left' spacing={5} padding='2rem'>
+            <Box display='grid' fontFamily='karla'  fontSize={18} fontWeight='bold' >
+            <label htmlFor="date">Select date</label>
+              <input 
+              type="date"
+              placeholder="Select date"
+              id="date" 
+              name="date" 
+              onChange={handleDateChange} 
+              value={values.date}
+              onBlur={handleBlur}
+              
+              className={touched.date && errors.date ? 'input-error' : null}/>
+              {errors.date && touched.date && <p className='error'>{errors.date}</p>}
+            </Box>
+            <Box display='grid' fontFamily='karla'  fontSize={18} fontWeight='bold' >
+          <label htmlFor="time">Choose time</label>
+          <select 
+          placeholder="Select time"
+          id="time" 
+          name="time" 
+          
+          value={values.time}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={ errors.time && touched.time ? 'input-error' : null}>
             {availableSlots.map(slot => (
-              <option key={slot} value={slot} disabled={bookedSlots.includes(slot)}>
-                {slot}
-              </option>
-            ))}
-            </Select>
-             )}
-          </Field>
-          <ErrorMessage name="time" component="div" />
+              <option key={slot} value={slot} disabled={bookedSlots.includes(slot)}>{slot}</option>))}
+          </select>
+          {errors.time && touched.time && <p className='error'>{errors.time}</p>}
+          </Box>
 
-          <FormLabel>Number of guests</FormLabel>
-          <NumberInput max={10} min={1}>
-            <NumberInputField name='guests' />
-            <NumberInputStepper>
-            <NumberIncrementStepper />
-            <NumberDecrementStepper />
-            </NumberInputStepper>
-            </NumberInput>
-
-          <ErrorMessage name="guests" component="div" />
-
-          <FormLabel>Occasion</FormLabel>
-          <Field name="occasion">
-          {({ field, form }) => (
-          <Select {...field} id="occasion" name='occasion' placeholder='Select occasion'>
+          <Box display='grid' fontFamily='karla'  fontSize={18} fontWeight='bold' >
+          <label htmlFor='guests'>Number of guests</label>
+          <input type="number" 
+          placeholder="1" 
+          min="1" 
+          max="10"
+          id="guests"
+          onChange={handleChange} 
+          value={values.guests}
+          className={ errors.guests && touched.guests ? 'input-error' : null}/>
+          {errors.guests && touched.guests && <p className='error'>{errors.guests}</p>}
+          </Box>
+          
+          <Box display='grid' fontFamily='karla'  fontSize={18} fontWeight='bold' >
+          <label htmlFor="occasion">Occasion</label>
+          <select id="occasion" 
+          name="occasion" 
+          placeholder="Select occasion"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={values.occasion}
+          className={touched.occasion && errors.occasion ? 'input-error' : null}>
           <option value="Birthday">Birthday</option>
-          <option value="Anniversary">Anniversary</option>
-          </Select>
-          )}
-          </Field>
-          <ErrorMessage name="occasion" component="div" />
+          <option value="Anniversary">Anniversary</option> 
+          </select>
+          {errors.occasion && touched.occasion && <p className='error'>{errors.occasion}</p>}
+          </Box>
 
           <Button
   type='submit'
@@ -88,13 +121,11 @@ function BookingForm({ bookedSlots, onSubmit, onDateChange, selectedDate }) {
   fontWeight='extrabold'
   textColor='black'
   borderRadius='16'
-  w={40}
 >
   Make Your reservation
 </Button>
-        </Form>
-      )}
-    </Formik>
+</VStack>
+        </form>
     </VStack>
   );
 }
