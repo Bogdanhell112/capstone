@@ -8,8 +8,18 @@ Button,
 VStack } from '@chakra-ui/react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { useEffect, useState } from 'react';
+import { fetchAPI, submitAPI } from '../utilities/api';
 
-function BookingForm({ bookedSlots, availableSlots, onSubmit }) {
+function BookingForm({ bookedSlots, onSubmit, onDateChange, selectedDate }) {
+  const [availableSlots, setAvailableSlots] = useState([]);
+
+  useEffect(() => {
+    const date = new Date();
+    const slots = fetchAPI(date);
+    setAvailableSlots(slots);
+  }, []);
+
   const validationSchema = Yup.object().shape({
     date: Yup.date().required('Date is required'),
     time: Yup.string().required('Time is required'),
@@ -24,13 +34,13 @@ function BookingForm({ bookedSlots, availableSlots, onSubmit }) {
 
   return (
     <VStack backgroundColor='white'>
-    <Formik initialValues={{ date: '', time: '', guests: 1, occasion: '' }}
+    <Formik initialValues={{ date: selectedDate, time: '', guests: 1, occasion: '' }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}>
       {({ isSubmitting }) => (
         <Form>
             <FormLabel>Date</FormLabel>
-            <Field type="date" name="date" />
+            <Field type="date" name="date" onChange={(e) => onDateChange(e.target.value)} value={selectedDate}/>
             <ErrorMessage name="date" component="div" />
 
           <FormLabel htmlFor="time">Choose time</FormLabel>
@@ -49,7 +59,7 @@ function BookingForm({ bookedSlots, availableSlots, onSubmit }) {
 
           <FormLabel>Number of guests</FormLabel>
           <NumberInput max={10} min={1}>
-            <NumberInputField />
+            <NumberInputField name='guests' />
             <NumberInputStepper>
             <NumberIncrementStepper />
             <NumberDecrementStepper />
@@ -61,7 +71,7 @@ function BookingForm({ bookedSlots, availableSlots, onSubmit }) {
           <FormLabel>Occasion</FormLabel>
           <Field name="occasion">
           {({ field, form }) => (
-          <Select {...field} id="occasion" placeholder='Select occasion'>
+          <Select {...field} id="occasion" name='occasion' placeholder='Select occasion'>
           <option value="Birthday">Birthday</option>
           <option value="Anniversary">Anniversary</option>
           </Select>
