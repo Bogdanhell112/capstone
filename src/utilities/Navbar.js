@@ -70,7 +70,7 @@ const Navbar = () => {
             <Link to='/' className='nav-item'>Home</Link>
             <Link to='/menu' className='nav-item'>Menu</Link>
             <Link to='/reservations' className='nav-item'>Reservations</Link>
-            <Link to='/' spy={true} smooth={true} offset={50} duration={500} className='about'>About</Link>
+            <Link to='/' className='about'>About</Link>
             <Link to='/order-online' className='nav-item'>Order Online</Link>
             <Link to='/login' className='nav-item'>Login</Link>
             </HStack>

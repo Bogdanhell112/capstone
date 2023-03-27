@@ -4,7 +4,6 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useEffect, useState } from 'react';
 import { fetchAPI, submitAPI } from '../utilities/api';
-import ConfirmedBooking from '../components/ConfirmedBooking';
 
 function BookingForm({ bookedSlots, onSubmit, onDateChange }) {
   const [availableSlots, setAvailableSlots] = useState([]);
@@ -46,13 +45,14 @@ function BookingForm({ bookedSlots, onSubmit, onDateChange }) {
   const handleDateChange = (e) => {
     const date = e.target.value;
     setSelectedDate(date);
+    onDateChange(date);
     setFieldValue('date', date);
     fetchAPI(date).then(slots => setAvailableSlots(slots));
   };
 
   return (
     <VStack backgroundColor='white'>
-        <form id="form" name="form" onSubmit={handleSubmit}>
+        <form id="form" className='form' onSubmit={handleSubmit}>
             <VStack border='4px'margin={5} borderRadius='18' borderColor="#495e57" justify='center' justifyContent='space-between' alignContent='center' textAlign='left' spacing={5} padding='2rem'>
             <Box display='grid' fontFamily='karla'  fontSize={18} fontWeight='bold' >
             <label htmlFor="date">Select date</label>
