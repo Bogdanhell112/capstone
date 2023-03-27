@@ -5,7 +5,6 @@ import BookingForm from '../utilities/BookingForm';
 import BookingSlots from '../utilities/BookingSlots';
 import { Flex, Box, HStack, VStack, Heading, Text, Image, Button } from '@chakra-ui/react';
 import { fetchAPI, submitAPI } from '../utilities/api';
-import ConfirmedBooking from '../components/ConfirmedBooking';
 import './Reservations.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -40,19 +39,6 @@ const Reservations = () => {
         console.error(error);
       });
   };
-
-  // console.log("Values before submitAPI: ", values);
-  // submitAPI(values)
-  //   .then((response) => {
-  //     console.log("SubmitAPI response: ", response);
-  //     if (response) {
-  //       navigate('/booking-confirmation');
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
-  // console.log("Values after submitAPI: ", values);
 
   const handleFormSubmit = (values) => {
     const newSlot = values.time;

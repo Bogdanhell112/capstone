@@ -11,7 +11,7 @@ function BookingForm({ bookedSlots, onSubmit, onDateChange }) {
   const [selectedDate, setSelectedDate] = useState('');
 
   const validationSchema = Yup.object().shape({
-    date: Yup.date().required('Date is required'),
+    date: Yup.date().required('Date is required').min(new Date(), 'Date must be in the future'),
     time: Yup.string().required('Time is required'),
     guests: Yup.number().required('Number of guests is required').min(1, 'Must be at least 1').max(10, 'Cannot exceed 10'),
     occasion: Yup.string().required('Occasion is required'),
@@ -46,14 +46,13 @@ function BookingForm({ bookedSlots, onSubmit, onDateChange }) {
   const handleDateChange = (e) => {
     const date = e.target.value;
     setSelectedDate(date);
-    onDateChange(date);
     setFieldValue('date', date);
     fetchAPI(date).then(slots => setAvailableSlots(slots));
   };
 
   return (
     <VStack backgroundColor='white'>
-        <form onSubmit={handleSubmit}>
+        <form id="form" name="form" onSubmit={handleSubmit}>
             <VStack border='4px'margin={5} borderRadius='18' borderColor="#495e57" justify='center' justifyContent='space-between' alignContent='center' textAlign='left' spacing={5} padding='2rem'>
             <Box display='grid' fontFamily='karla'  fontSize={18} fontWeight='bold' >
             <label htmlFor="date">Select date</label>
