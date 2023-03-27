@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useEffect, useState } from 'react';
 import { fetchAPI, submitAPI } from '../utilities/api';
+import ConfirmedBooking from '../components/ConfirmedBooking';
 
 function BookingForm({ bookedSlots, onSubmit, onDateChange }) {
   const [availableSlots, setAvailableSlots] = useState([]);
@@ -19,14 +20,16 @@ function BookingForm({ bookedSlots, onSubmit, onDateChange }) {
   const currentDate = new Date();
   const formattedDate = currentDate.toISOString().slice(0, 10);
   const {values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, setFieldValue} = useFormik({
-    initialValues: {  
+    initialValues: {
       date: '',
       time: '',
       guests: '',
       occasion: '',
     },
     validationSchema: validationSchema,
-    onSubmit,
+    onSubmit: values => {
+     onSubmit(values);
+    },
   });
 
     console.log(values);
@@ -37,7 +40,6 @@ function BookingForm({ bookedSlots, onSubmit, onDateChange }) {
     fetchAPI(selectedDate).then(slots => setAvailableSlots(slots));
   }, [selectedDate]);
 
-  
 
 // get the submited values and update the available slots
 
@@ -45,35 +47,34 @@ function BookingForm({ bookedSlots, onSubmit, onDateChange }) {
     const date = e.target.value;
     setSelectedDate(date);
     onDateChange(date);
-    setFieldValue('date', date); 
+    setFieldValue('date', date);
     fetchAPI(date).then(slots => setAvailableSlots(slots));
   };
 
   return (
     <VStack backgroundColor='white'>
         <form onSubmit={handleSubmit}>
-            <VStack justify='center' justifyContent='space-between' alignContent='center' textAlign='left' spacing={5} padding='2rem'>
+            <VStack border='4px'margin={5} borderRadius='18' borderColor="#495e57" justify='center' justifyContent='space-between' alignContent='center' textAlign='left' spacing={5} padding='2rem'>
             <Box display='grid' fontFamily='karla'  fontSize={18} fontWeight='bold' >
             <label htmlFor="date">Select date</label>
-              <input 
+              <input
               type="date"
               placeholder="Select date"
-              id="date" 
-              name="date" 
-              onChange={handleDateChange} 
+              id="date"
+              name="date"
+              onChange={handleDateChange}
               value={values.date}
               onBlur={handleBlur}
-              
+
               className={touched.date && errors.date ? 'input-error' : null}/>
               {errors.date && touched.date && <p className='error'>{errors.date}</p>}
             </Box>
             <Box display='grid' fontFamily='karla'  fontSize={18} fontWeight='bold' >
           <label htmlFor="time">Choose time</label>
-          <select 
+          <select
           placeholder="Select time"
-          id="time" 
-          name="time" 
-          
+          id="time"
+          name="time"
           value={values.time}
           onChange={handleChange}
           onBlur={handleBlur}
@@ -86,28 +87,28 @@ function BookingForm({ bookedSlots, onSubmit, onDateChange }) {
 
           <Box display='grid' fontFamily='karla'  fontSize={18} fontWeight='bold' >
           <label htmlFor='guests'>Number of guests</label>
-          <input type="number" 
-          placeholder="1" 
-          min="1" 
+          <input type="number"
+          placeholder="1"
+          min="1"
           max="10"
           id="guests"
-          onChange={handleChange} 
+          onChange={handleChange}
           value={values.guests}
           className={ errors.guests && touched.guests ? 'input-error' : null}/>
           {errors.guests && touched.guests && <p className='error'>{errors.guests}</p>}
           </Box>
-          
+
           <Box display='grid' fontFamily='karla'  fontSize={18} fontWeight='bold' >
           <label htmlFor="occasion">Occasion</label>
-          <select id="occasion" 
-          name="occasion" 
+          <select id="occasion"
+          name="occasion"
           placeholder="Select occasion"
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.occasion}
           className={touched.occasion && errors.occasion ? 'input-error' : null}>
           <option value="Birthday">Birthday</option>
-          <option value="Anniversary">Anniversary</option> 
+          <option value="Anniversary">Anniversary</option>
           </select>
           {errors.occasion && touched.occasion && <p className='error'>{errors.occasion}</p>}
           </Box>
@@ -116,17 +117,21 @@ function BookingForm({ bookedSlots, onSubmit, onDateChange }) {
   type='submit'
   isLoading={isSubmitting}
   loadingText='Submitting'
-  backgroundColor='#f4ce14'
-  fontFamily='karla'
+  fontFamily='Karla'
+  fontSize='18'
   fontWeight='extrabold'
   textColor='black'
-  borderRadius='16'
+  backgroundColor='#f4ce14'
+  padding='1.5rem 3rem'
+  borderRadius='16' w='3xs' boxShadow='lg'
+  _hover={{ boxShadow: 'none', backgroundColor: '#495e57', textColor: 'white' }} _active={{ boxShadow: 'none' }} _focus={{ boxShadow: 'none' }}
 >
   Make Your reservation
 </Button>
 </VStack>
         </form>
     </VStack>
+
   );
 }
 

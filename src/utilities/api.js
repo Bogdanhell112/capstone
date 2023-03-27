@@ -8,7 +8,11 @@ const seededRandom = function (seed) {
 }
 
 export const submitAPI = function(values) {
-    return true;
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(true);
+    }, 1000);
+  });
 };
 
 export const fetchAPI = function(date) {
@@ -16,7 +20,7 @@ export const fetchAPI = function(date) {
       date = new Date(date);
       let result = [];
       let random = seededRandom(date.getDate());
-  
+
       for (let i = 17; i <= 23; i++) {
         if (random() < 0.5) {
           result.push(i + ':00');
@@ -25,7 +29,7 @@ export const fetchAPI = function(date) {
           result.push(i + ':30');
         }
       }
-  
+
       setTimeout(() => {
         resolve(result);
       }, 1000);

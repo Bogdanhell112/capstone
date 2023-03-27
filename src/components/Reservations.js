@@ -5,11 +5,18 @@ import BookingForm from '../utilities/BookingForm';
 import BookingSlots from '../utilities/BookingSlots';
 import { Flex, Box, HStack, VStack, Heading, Text, Image, Button } from '@chakra-ui/react';
 import { fetchAPI, submitAPI } from '../utilities/api';
+import ConfirmedBooking from '../components/ConfirmedBooking';
+import './Reservations.css';
+import { useNavigate } from 'react-router-dom';
 
 const Reservations = () => {
   const [bookedSlots, setBookedSlots] = useState([]);
   const [availableSlots, setAvailableSlots] = useState([]);
   const [selectedDate, setSelectedDate] = useState([]);
+  const [selectedTime, setSelectedTime] = useState('');
+  const [selectedGuests, setSelectedGuests] = useState('');
+  const [selectedOccasion, setSelectedOccasion] = useState('');
+  const navigate = useNavigate();
 
   const getAvailableSlots = (date) => {
     // Simulate an API call to fetch the available slots for a given date
@@ -34,11 +41,42 @@ const Reservations = () => {
       });
   };
 
+  // console.log("Values before submitAPI: ", values);
+  // submitAPI(values)
+  //   .then((response) => {
+  //     console.log("SubmitAPI response: ", response);
+  //     if (response) {
+  //       navigate('/booking-confirmation');
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+  //   });
+  // console.log("Values after submitAPI: ", values);
+
   const handleFormSubmit = (values) => {
     const newSlot = values.time;
     setBookedSlots([...bookedSlots, newSlot]);
-    submitAPI(values);
+    const confirmedDate = values.date;
+    setSelectedDate(confirmedDate);
+    console.log(selectedDate)
+    const confirmedTime = values.time;
+    console.log(confirmedTime)
+    const confirmedGuests = values.guests;
+    console.log(confirmedGuests)
+    const confirmedOccasion = values.occasion;
+    console.log(confirmedOccasion)
     console.log(values);
+    submitAPI(values)
+      .then((response) => {
+        console.log(response); // will log true if submitAPI returns true
+        if (response) {
+          navigate('/booking-confirmation', { state: {selectedDate: confirmedDate, selectedTime: confirmedTime, selectedGuests: confirmedGuests, selectedOccasion: confirmedOccasion }});
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const handleSlotSelect = (slot) => {
@@ -64,7 +102,6 @@ const Reservations = () => {
           ))}
           </Flex>
         </HStack>
-        
         </VStack>
       <Footer />
     </>

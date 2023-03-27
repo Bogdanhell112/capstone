@@ -17,7 +17,8 @@ import InfoIcon from '@mui/icons-material/Info';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LoginIcon from '@mui/icons-material/Login';
 import { VStack, HStack, useMediaQuery } from '@chakra-ui/react';
-import {Routes, Route, Link} from 'react-router-dom'
+import {Routes, Route, Link } from 'react-router-dom'
+import { Element } from 'react-scroll'
 
 const Navbar = () => {
     const [openMenu, setOpenMenu] = useState(false);
@@ -30,7 +31,7 @@ const Navbar = () => {
         {
             text: 'Menu',
             icon: <MenuBookIcon />,
-            url:  <Link to='/' className='nav-item'>Menu</Link>
+            url:  <Link to='/menu' className='nav-item'>Menu</Link>
         },
         {
             text: 'Reservations',
@@ -40,17 +41,17 @@ const Navbar = () => {
         {
             text: 'About',
             icon: <InfoIcon />,
-            url: <Link to='/about' className='nav-item'>About</Link>
+            url: <Link to='/' className='nav-item'>About</Link>
         },
         {
             text: 'Order Online',
             icon: <ShoppingCartIcon />,
-            url: <Link to='/' className='nav-item'>Order Online</Link>
+            url: <Link to='/order-online' className='nav-item'>Order Online</Link>
         },
         {
             text: 'Login',
             icon: <LoginIcon />,
-            url: <Link to='/' className='nav-item'>Login</Link>
+            url: <Link to='/login' className='nav-item'>Login</Link>
         },
     ];
 
@@ -67,11 +68,11 @@ const Navbar = () => {
             fontSize={isSmallerThan900 ? '16px' : '18px'} display={isSmallerThan800 ? 'none' : 'flex'} 
             justifyContent='space-around' >
             <Link to='/' className='nav-item'>Home</Link>
-            <Link to='/' className='nav-item'>Menu</Link>
+            <Link to='/menu' className='nav-item'>Menu</Link>
             <Link to='/reservations' className='nav-item'>Reservations</Link>
-            <Link to='/about' className='nav-item'>About</Link>
-            <Link to='/' className='nav-item'>Order Online</Link>
-            <Link to='/' className='nav-item'>Login</Link>
+            <Link to='/' spy={true} smooth={true} offset={50} duration={500} className='about'>About</Link>
+            <Link to='/order-online' className='nav-item'>Order Online</Link>
+            <Link to='/login' className='nav-item'>Login</Link>
             </HStack>
             <div className="nav-menu-container">
             <HiOutlineBars3 onClick={() => setOpenMenu(!openMenu)} />

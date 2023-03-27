@@ -13,6 +13,7 @@ import Profile2 from '../users_picture/profile2.jpeg'
 import Profile3 from '../users_picture/profile3.jpeg'
 import Profile4 from '../users_picture/profile4.jpeg'
 import Profile5 from '../users_picture/profile5.jpeg'
+import Profile6 from '../users_picture/profile6.jpg'
 import Pic5 from '../icons_assets/restaurantchefB.jpg'
 import Pic6 from '../icons_assets/restaurant.jpg'
 import { Link } from 'react-router-dom'
@@ -44,19 +45,19 @@ const Home = () => {
       starRating: 4,
       customerName: 'Andreea',
       pictureUrl: Profile4,
-      review: 'Awesome food, awesome service, awesome atmosphere. I would recommend this place to anyone.'
+      review: 'The place was great, the waiters were very friendly and the food was delicious.'
     },
     {
       starRating: 3,
       customerName: 'Gassan',
       pictureUrl: Profile5,
-      review: 'Awesome food, awesome service, awesome atmosphere. I would recommend this place to anyone.'
+      review: 'I never thought I would say this, but the food was actually good.'
     },
     {
       starRating: 5,
-      customerName: 'Elena',
-      pictureUrl: Profile3,
-      review: 'Awesome food, awesome service, awesome atmosphere. I would recommend this place to anyone.'
+      customerName: 'Daniel',
+      pictureUrl: Profile6,
+      review: 'Great time, great food, great service. I would recommend this place to anyone.'
     },
   ]
   const weekSpecials = [
@@ -124,9 +125,11 @@ const Home = () => {
             <Heading display='flex' fontFamily='Markazi Text' fontSize='64' fontWeight='medium' textColor='black' justifyContent='center'  alignItems='center' lineHeight={10} >
             This weeks specials!
             </Heading>
-                <Button fontFamily='Karla' fontSize='18' fontWeight='extrabold' textColor='black' backgroundColor='#f4ce14' padding='1.5rem 3rem' borderRadius='16' w='3xs' boxShadow='lg' _hover={{ boxShadow: 'none', backgroundColor: '#495e57', textColor: 'white' }} _active={{ boxShadow: 'none' }} _focus={{ boxShadow: 'none' }}>
+                <Link to='/menu' className='nav-item'>
+                <Button  fontFamily='Karla' fontSize='18' fontWeight='extrabold' textColor='black' backgroundColor='#f4ce14' padding='1.5rem 3rem' borderRadius='16' w='3xs' boxShadow='lg' _hover={{ boxShadow: 'none', backgroundColor: '#495e57', textColor: 'white' }} _active={{ boxShadow: 'none' }} _focus={{ boxShadow: 'none' }}>
                 Online Menu
                 </Button>
+                </Link>
         </HStack>
     <div className='specials-container'>
     <Flex direction={['column', 'row']} wrap='wrap'align='stretch' justify='center' gap={10}>
@@ -157,6 +160,7 @@ const Home = () => {
     ))}
 </Box>
 </VStack>
+<div id='about' className='about'>
         <Heading fontFamily='Markazi Text' fontSize='64' padding='3rem 0 0 0' textAlign='center'>
           About Us
         </Heading>
@@ -188,6 +192,7 @@ const Home = () => {
     },
   }}/>
         </HStack>
+      </div>
         <Footer/>
     </div>
   )
